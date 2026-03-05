@@ -1,0 +1,17 @@
+name: Deploy to Azure WebApp
+on:
+ push:
+   branches:
+     - main
+jobs:
+ build-and-deploy:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v3
+     - uses: azure/login@v1
+       with:
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
+     - uses: azure/webapps-deploy@v2
+       with:
+         app-name: myWebAppName
+         package:
